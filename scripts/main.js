@@ -20,3 +20,6 @@ function addBookToLibrary(author, title, pages, readStatus) {
 
 addBookToLibrary("J.R.R. Tolkien", "The Lord of The Rings", 1137, "Completed");
 addBookToLibrary("J.K. Rowling", "Harry Potter", 3407, "Completed");
+
+// for (book of myLibrary) {
+// }
