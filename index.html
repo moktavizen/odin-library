@@ -12,7 +12,37 @@
     <header>
       <nav class="top-nav">
         <a class="logo" href="#">📚 ralin.lib</a>
-        <button class="add-book-btn" type="button">Add Book</button>
+        <dialog id="new-book-dialog">
+          <h2>Add New Book</h2>
+          <form id="new-book-form">
+            <div>
+              <label for="form-title-input">Title</label>
+              <input type="text" id="form-title-input" placeholder="Lorem Ipsum" required />
+            </div>
+            <div>
+              <label for="form-author-input">Author</label>
+              <input type="text" id="form-author-input" placeholder="John Doe" required />
+            </div>
+            <div>
+              <label for="form-pages-input">Pages</label>
+              <input type="number" id="form-pages-input" placeholder="420" required />
+            </div>
+            <div>
+              <label for="form-status-select">Read Status</label>
+              <select name="readStatus" id="form-status-select">
+                <option>Reading</option>
+                <option>Completed</option>
+                <option>On-Hold</option>
+                <option>Plan to Read</option>
+              </select>
+            </div>
+            <div>
+              <button class="confirm-btn" id="confirm-new-book-btn" type="submit">Confirm</button>
+              <button formmethod="dialog" formnovalidate>Cancel</button>
+            </div>
+          </form>
+        </dialog>
+        <button class="new-book-btn" id="new-book-btn" type="button">New Book</button>
       </nav>
     </header>
     <main>

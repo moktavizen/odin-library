@@ -1,29 +1,27 @@
 const myLibrary = [];
 
 // the constructor...
-function Book(author, title, pages, readStatus) {
+function Book(title, author, pages, readStatus) {
   if (!new.target) {
     throw Error("Constructors must be called using the `new` keyword");
   }
   this.id = crypto.randomUUID();
-  this.author = author;
   this.title = title;
+  this.author = author;
   this.pages = pages;
   this.readStatus = readStatus;
 }
 
 // take params, create a book then store it in the array
-function addBookToLibrary(author, title, pages, readStatus) {
-  const newBook = new Book(author, title, pages, readStatus);
+function addBookToLibrary(title, author, pages, readStatus) {
+  const newBook = new Book(title, author, pages, readStatus);
   myLibrary.push(newBook);
 }
 
-addBookToLibrary("J.R.R. Tolkien", "The Lord of The Rings", 1137, "Completed");
-addBookToLibrary("J.K. Rowling", "Harry Potter", 3407, "Reading");
+addBookToLibrary("The Lord of The Rings", "J.R.R. Tolkien", 1137, "Completed");
+addBookToLibrary("Harry Potter", "J.K. Rowling", 3407, "Reading");
 
-const elements = {
-  bookList: document.querySelector("#book-list"),
-};
+const bookList = document.querySelector("#book-list");
 
 function displayCards(bookTitle, bookAuthor, bookPages, bookReadStatus) {
   const card = document.createElement("div");
@@ -46,12 +44,10 @@ function displayCards(bookTitle, bookAuthor, bookPages, bookReadStatus) {
   pages.textContent = bookPages;
 
   const statusLabel = document.createElement("label");
-  statusLabel.setAttribute("for", "status");
   statusLabel.textContent = "Status";
 
   const statusSelect = document.createElement("select");
   statusSelect.setAttribute("name", "readStatus");
-  statusSelect.setAttribute("id", "status");
   const optReading = document.createElement("option");
   optReading.textContent = "Reading";
   const optCompleted = document.createElement("option");
@@ -90,9 +86,50 @@ function displayCards(bookTitle, bookAuthor, bookPages, bookReadStatus) {
   statusSelect.appendChild(optOnHold);
   statusSelect.appendChild(optPlanToRead);
 
-  elements.bookList.appendChild(card);
+  bookList.appendChild(card);
 }
 
-for (const book of myLibrary) {
-  displayCards(book.title, book.author, book.pages, book.readStatus);
+function renderLibrary() {
+  for (const book of myLibrary) {
+    displayCards(book.title, book.author, book.pages, book.readStatus);
+  }
 }
+
+renderLibrary();
+
+const newBookDialog = document.querySelector("#new-book-dialog");
+const showNewBookBtn = document.querySelector("#new-book-btn");
+const confirmNewBookBtn = document.querySelector("#confirm-new-book-btn");
+
+showNewBookBtn.addEventListener("click", () => {
+  newBookDialog.showModal();
+});
+
+const newBookForm = document.querySelector("#new-book-form");
+const formTitleInput = document.querySelector("#form-title-input");
+const formAuthorInput = document.querySelector("#form-author-input");
+const formPagesInput = document.querySelector("#form-pages-input");
+const formStatusSelect = document.querySelector("#form-status-select");
+
+function clearLibrary() {
+  bookList.replaceChildren();
+}
+
+confirmNewBookBtn.addEventListener("click", (e) => {
+  if (newBookForm.checkValidity()) {
+    e.preventDefault();
+
+    addBookToLibrary(
+      formTitleInput.value,
+      formAuthorInput.value,
+      Number(formPagesInput.value),
+      formStatusSelect.value,
+    );
+
+    newBookForm.reset();
+    newBookDialog.close();
+
+    clearLibrary();
+    renderLibrary();
+  }
+});

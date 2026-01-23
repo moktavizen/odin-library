@@ -6,7 +6,6 @@
   --white200: #edeef3;
   --white300: #d5d6db;
   --primary: #3d50f5;
-  --border: 1px solid var(--white200);
   --bg-primary: #cfd4fc;
 }
 
@@ -23,7 +22,7 @@ body {
 
 header {
   background: var(--white100);
-  border-bottom: var(--border);
+  border-bottom: 1px solid var(--white200);
   position: sticky;
   top: 0;
 }
@@ -42,14 +41,16 @@ header {
   font-weight: 700;
 }
 
-.add-book-btn {
-  border-radius: 100px;
-  padding: 8px 16px;
-  color: var(--white);
+button {
+  border-radius: 8px;
+  padding: 6px 10px;
+  background: var(--white300);
+  font-weight: 500;
 }
 
-.add-book-btn {
+.new-book-btn {
   background: var(--primary);
+  color: var(--white);
 }
 
 button:hover {
@@ -88,14 +89,14 @@ h1 {
   margin-top: 16px;
 
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 16px;
 }
 
 .card {
   background: var(--white100);
   padding: 16px;
-  border: var(--border);
+  border-bottom: 1px solid var(--white200);
   border-radius: 12px;
 
   display: grid;
@@ -115,13 +116,75 @@ h1 {
 }
 
 select {
-  background: var(--white300);
+  border: 1px solid var(--white300);
   border-radius: 4px;
+}
+
+dialog {
+  background: var(--white);
+  padding: 16px;
+  border: 1px solid var(--white300);
+  border-radius: 12px;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  max-width: 420px;
+  width: 100%;
+}
+
+dialog h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+dialog label,
+dialog input {
+  display: block;
+}
+
+dialog label {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+dialog input,
+dialog select {
+  padding: 6px 10px;
+  border: 1px solid var(--white300);
+  border-radius: 8px;
+  width: 100%;
+}
+
+dialog select {
+  padding: 6px;
+}
+
+dialog form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+dialog button {
+  margin-right: 8px;
+}
+
+.confirm-btn {
+  background: var(--primary);
+  color: var(--white);
 }
 
 footer {
   background: var(--white100);
   text-align: center;
-  border-top: var(--border);
+  border-top: 1px solid var(--white200);
   padding: 16px;
+}
+
+a:hover {
+  text-decoration: underline;
 }
