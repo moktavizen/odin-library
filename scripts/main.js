@@ -24,7 +24,7 @@ function addBookToLibrary(title, author, pages, readStatus) {
 
 const bookList = document.querySelector("#book-list");
 
-function displayCards(bookId, bookTitle, bookAuthor, bookPages, bookReadStatus) {
+function displayCard(bookId, bookTitle, bookAuthor, bookPages, bookReadStatus) {
   const card = document.createElement("div");
   card.classList.add("card");
 
@@ -108,7 +108,7 @@ function renderLibrary() {
   bookList.classList.remove("empty");
 
   for (const book of myLibrary) {
-    displayCards(book.id, book.title, book.author, book.pages, book.readStatus);
+    displayCard(book.id, book.title, book.author, book.pages, book.readStatus);
   }
 }
 
