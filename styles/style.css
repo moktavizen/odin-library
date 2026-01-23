@@ -134,18 +134,21 @@ select {
 }
 
 dialog {
-  background: var(--white);
-  padding: 16px;
-  border: 1px solid var(--white300);
-  border-radius: 12px;
+  width: calc(100% - 32px);
+  max-width: 420px;
+  height: calc(100% - 32px);
+  max-height: fit-content;
+  overflow: auto;
 
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
-  max-width: 420px;
-  width: 100%;
+  background: var(--white);
+  padding: 16px;
+  border: 1px solid var(--white300);
+  border-radius: 12px;
 }
 
 dialog h2 {
