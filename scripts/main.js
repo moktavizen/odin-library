@@ -12,6 +12,10 @@ function Book(title, author, pages, readStatus) {
   this.readStatus = readStatus;
 }
 
+Book.prototype.setReadStatus = function (newReadStatus) {
+  this.readStatus = newReadStatus;
+};
+
 // take params, create a book then store it in the array
 function addBookToLibrary(title, author, pages, readStatus) {
   const newBook = new Book(title, author, pages, readStatus);
@@ -47,7 +51,9 @@ function displayCards(bookId, bookTitle, bookAuthor, bookPages, bookReadStatus) 
   statusLabel.textContent = "Status";
 
   const statusSelect = document.createElement("select");
+  statusSelect.classList.add("status-select");
   statusSelect.setAttribute("name", "readStatus");
+  statusSelect.setAttribute("data-id", `${bookId}`);
   const optReading = document.createElement("option");
   optReading.textContent = "Reading";
   const optCompleted = document.createElement("option");
@@ -76,7 +82,6 @@ function displayCards(bookId, bookTitle, bookAuthor, bookPages, bookReadStatus) 
 
   const removeBookBtn = document.createElement("button");
   removeBookBtn.classList.add("remove-book-btn");
-  removeBookBtn.id = "remove-book-btn";
   removeBookBtn.setAttribute("data-id", `${bookId}`);
   removeBookBtn.textContent = "Remove";
 
@@ -143,15 +148,15 @@ confirmNewBookBtn.addEventListener("click", (e) => {
 
 bookList.addEventListener("click", (e) => {
   const target = e.target;
-
-  if (target.id !== "remove-book-btn") {
-    return;
-  }
-
   const targetIndex = myLibrary.findIndex((book) => book.id === target.dataset.id);
-
-  myLibrary.splice(targetIndex, 1);
-
-  clearLibrary();
-  renderLibrary();
+  switch (target.className) {
+    case "status-select":
+      myLibrary[targetIndex].setReadStatus(target.value);
+      break;
+    case "remove-book-btn":
+      myLibrary.splice(targetIndex, 1);
+      clearLibrary();
+      renderLibrary();
+      break;
+  }
 });
