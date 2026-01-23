@@ -116,6 +116,7 @@ h1 {
 }
 
 select {
+  padding-inline: 4px;
   border: 1px solid var(--white300);
   border-radius: 4px;
 }
