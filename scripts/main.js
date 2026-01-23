@@ -22,9 +22,6 @@ function addBookToLibrary(title, author, pages, readStatus) {
   myLibrary.push(newBook);
 }
 
-addBookToLibrary("The Lord of The Rings", "J.R.R. Tolkien", 1137, "Completed");
-addBookToLibrary("Harry Potter", "J.K. Rowling", 3407, "Reading");
-
 const bookList = document.querySelector("#book-list");
 
 function displayCards(bookId, bookTitle, bookAuthor, bookPages, bookReadStatus) {
@@ -102,6 +99,14 @@ function displayCards(bookId, bookTitle, bookAuthor, bookPages, bookReadStatus) 
 }
 
 function renderLibrary() {
+  if (!myLibrary.length) {
+    bookList.classList.add("empty");
+    bookList.innerHTML =
+      "There are no books ☹️<br />Add new book using button at the top right corner!";
+    return;
+  }
+  bookList.classList.remove("empty");
+
   for (const book of myLibrary) {
     displayCards(book.id, book.title, book.author, book.pages, book.readStatus);
   }
