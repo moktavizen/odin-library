@@ -7,6 +7,7 @@
   --white300: #d5d6db;
   --primary: #3d50f5;
   --bg-primary: #cfd4fc;
+  --bg-danger: #ff0033;
 }
 
 body {
@@ -74,6 +75,7 @@ h1 {
   font-size: 2rem;
   font-weight: 700;
   text-align: center;
+  margin-bottom: 16px;
 }
 
 .book-list.empty {
@@ -86,8 +88,6 @@ h1 {
 }
 
 .book-list {
-  margin-top: 16px;
-
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 16px;
@@ -118,6 +118,18 @@ h1 {
 select {
   border: 1px solid var(--white300);
   border-radius: 4px;
+}
+
+.remove-book-btn {
+  margin-top: 8px;
+  grid-column: 1 / -1;
+  justify-self: end;
+}
+
+.remove-book-btn:hover {
+  opacity: 1;
+  background: var(--bg-danger);
+  color: var(--white);
 }
 
 dialog {

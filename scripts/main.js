@@ -23,7 +23,7 @@ addBookToLibrary("Harry Potter", "J.K. Rowling", 3407, "Reading");
 
 const bookList = document.querySelector("#book-list");
 
-function displayCards(bookTitle, bookAuthor, bookPages, bookReadStatus) {
+function displayCards(bookId, bookTitle, bookAuthor, bookPages, bookReadStatus) {
   const card = document.createElement("div");
   card.classList.add("card");
 
@@ -43,7 +43,7 @@ function displayCards(bookTitle, bookAuthor, bookPages, bookReadStatus) {
   const pages = document.createElement("div");
   pages.textContent = bookPages;
 
-  const statusLabel = document.createElement("label");
+  const statusLabel = document.createElement("div");
   statusLabel.textContent = "Status";
 
   const statusSelect = document.createElement("select");
@@ -74,6 +74,12 @@ function displayCards(bookTitle, bookAuthor, bookPages, bookReadStatus) {
       throw Error("Unknown read status!");
   }
 
+  const removeBookBtn = document.createElement("button");
+  removeBookBtn.classList.add("remove-book-btn");
+  removeBookBtn.id = "remove-book-btn";
+  removeBookBtn.setAttribute("data-id", `${bookId}`);
+  removeBookBtn.textContent = "Remove";
+
   card.appendChild(title);
   card.appendChild(authorLabel);
   card.appendChild(author);
@@ -85,13 +91,14 @@ function displayCards(bookTitle, bookAuthor, bookPages, bookReadStatus) {
   statusSelect.appendChild(optCompleted);
   statusSelect.appendChild(optOnHold);
   statusSelect.appendChild(optPlanToRead);
+  card.appendChild(removeBookBtn);
 
   bookList.appendChild(card);
 }
 
 function renderLibrary() {
   for (const book of myLibrary) {
-    displayCards(book.title, book.author, book.pages, book.readStatus);
+    displayCards(book.id, book.title, book.author, book.pages, book.readStatus);
   }
 }
 
@@ -132,4 +139,19 @@ confirmNewBookBtn.addEventListener("click", (e) => {
     clearLibrary();
     renderLibrary();
   }
+});
+
+bookList.addEventListener("click", (e) => {
+  const target = e.target;
+
+  if (target.id !== "remove-book-btn") {
+    return;
+  }
+
+  const targetIndex = myLibrary.findIndex((book) => book.id === target.dataset.id);
+
+  myLibrary.splice(targetIndex, 1);
+
+  clearLibrary();
+  renderLibrary();
 });
