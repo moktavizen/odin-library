@@ -6,7 +6,6 @@
   --white200: #edeef3;
   --white300: #d5d6db;
   --primary: #3d50f5;
-  --bg-primary: #cfd4fc;
   --bg-danger: #ff0033;
 }
 
@@ -97,7 +96,7 @@ h1 {
 .card {
   background: var(--white100);
   padding: 16px;
-  border-bottom: 1px solid var(--white200);
+  border-left: 10px solid var(--primary);
   border-radius: 12px;
 
   display: grid;
@@ -200,4 +199,11 @@ footer {
 
 a:hover {
   text-decoration: underline;
+}
+
+dialog,
+.card {
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
