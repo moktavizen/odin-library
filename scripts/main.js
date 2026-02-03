@@ -1,20 +1,19 @@
 const myLibrary = [];
 
 // the constructor...
-function Book(title, author, pages, readStatus) {
-  if (!new.target) {
-    throw Error("Constructors must be called using the `new` keyword");
+class Book {
+  constructor(title, author, pages, readStatus) {
+    this.id = crypto.randomUUID();
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.readStatus = readStatus;
   }
-  this.id = crypto.randomUUID();
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.readStatus = readStatus;
-}
 
-Book.prototype.setReadStatus = function (newReadStatus) {
-  this.readStatus = newReadStatus;
-};
+  setReadStatus(newReadStatus) {
+    this.readStatus = newReadStatus;
+  }
+}
 
 // take params, create a book then store it in the array
 function addBookToLibrary(title, author, pages, readStatus) {
