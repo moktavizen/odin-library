@@ -43,54 +43,54 @@ function addBookToLibrary(title, author, pages, readStatus) {
 
 const bookList = document.querySelector("#book-list");
 
-function displayCard(bookId, bookTitle, bookAuthor, bookPages, bookReadStatus) {
-  const card = document.createElement("div");
-  card.classList.add("card");
+function displayBookCard({ id, title, author, pages, readStatus }) {
+  const cardDiv = document.createElement("div");
+  cardDiv.classList.add("card");
 
-  const title = document.createElement("div");
-  title.classList.add("title");
-  title.textContent = bookTitle;
+  const titleDiv = document.createElement("div");
+  titleDiv.classList.add("title");
+  titleDiv.textContent = title;
 
-  const authorLabel = document.createElement("div");
-  authorLabel.textContent = "Author";
+  const authorLabelDiv = document.createElement("div");
+  authorLabelDiv.textContent = "Author";
 
-  const author = document.createElement("div");
-  author.textContent = bookAuthor;
+  const authorDiv = document.createElement("div");
+  authorDiv.textContent = author;
 
-  const pagesLabel = document.createElement("div");
-  pagesLabel.textContent = "Pages";
+  const pagesLabelDiv = document.createElement("div");
+  pagesLabelDiv.textContent = "Pages";
 
-  const pages = document.createElement("div");
-  pages.textContent = bookPages;
+  const pagesDiv = document.createElement("div");
+  pagesDiv.textContent = pages;
 
-  const statusLabel = document.createElement("div");
-  statusLabel.textContent = "Status";
+  const statusLabelDiv = document.createElement("div");
+  statusLabelDiv.textContent = "Status";
 
   const statusSelect = document.createElement("select");
   statusSelect.classList.add("status-select");
   statusSelect.setAttribute("name", "readStatus");
-  statusSelect.setAttribute("data-id", `${bookId}`);
-  const optReading = document.createElement("option");
-  optReading.textContent = "Reading";
-  const optCompleted = document.createElement("option");
-  optCompleted.textContent = "Completed";
-  const optOnHold = document.createElement("option");
-  optOnHold.textContent = "On-Hold";
-  const optPlanToRead = document.createElement("option");
-  optPlanToRead.textContent = "Plan to Read";
+  statusSelect.setAttribute("data-id", `${id}`);
+  const readingOption = document.createElement("option");
+  readingOption.textContent = "Reading";
+  const completedOption = document.createElement("option");
+  completedOption.textContent = "Completed";
+  const onHoldOption = document.createElement("option");
+  onHoldOption.textContent = "On-Hold";
+  const planToReadOption = document.createElement("option");
+  planToReadOption.textContent = "Plan to Read";
 
-  switch (bookReadStatus) {
+  switch (readStatus) {
     case "Reading":
-      optReading.setAttribute("selected", "");
+      readingOption.setAttribute("selected", "");
       break;
     case "Completed":
-      optCompleted.setAttribute("selected", "");
+      completedOption.setAttribute("selected", "");
       break;
     case "On-Hold":
-      optOnHold.setAttribute("selected", "");
+      onHoldOption.setAttribute("selected", "");
       break;
     case "Plan to Read":
-      optPlanToRead.setAttribute("selected", "");
+      planToReadOption.setAttribute("selected", "");
       break;
     default:
       throw Error("Unknown read status!");
@@ -98,23 +98,23 @@ function displayCard(bookId, bookTitle, bookAuthor, bookPages, bookReadStatus) {
 
   const removeBookBtn = document.createElement("button");
   removeBookBtn.classList.add("remove-book-btn");
-  removeBookBtn.setAttribute("data-id", `${bookId}`);
+  removeBookBtn.setAttribute("data-id", `${id}`);
   removeBookBtn.textContent = "Remove";
 
-  card.appendChild(title);
-  card.appendChild(authorLabel);
-  card.appendChild(author);
-  card.appendChild(pagesLabel);
-  card.appendChild(pages);
-  card.appendChild(statusLabel);
-  card.appendChild(statusSelect);
-  statusSelect.appendChild(optReading);
-  statusSelect.appendChild(optCompleted);
-  statusSelect.appendChild(optOnHold);
-  statusSelect.appendChild(optPlanToRead);
-  card.appendChild(removeBookBtn);
+  cardDiv.appendChild(titleDiv);
+  cardDiv.appendChild(authorLabelDiv);
+  cardDiv.appendChild(authorDiv);
+  cardDiv.appendChild(pagesLabelDiv);
+  cardDiv.appendChild(pagesDiv);
+  cardDiv.appendChild(statusLabelDiv);
+  cardDiv.appendChild(statusSelect);
+  statusSelect.appendChild(readingOption);
+  statusSelect.appendChild(completedOption);
+  statusSelect.appendChild(onHoldOption);
+  statusSelect.appendChild(planToReadOption);
+  cardDiv.appendChild(removeBookBtn);
 
-  bookList.appendChild(card);
+  bookList.appendChild(cardDiv);
 }
 
 function renderLibrary() {
@@ -127,7 +127,7 @@ function renderLibrary() {
   bookList.classList.remove("empty");
 
   for (const book of myLibrary) {
-    displayCard(book.id, book.title, book.author, book.pages, book.readStatus);
+    displayBookCard(book);
   }
 }
 
@@ -175,7 +175,7 @@ bookList.addEventListener("click", (e) => {
   const targetIndex = myLibrary.findIndex((book) => book.id === target.dataset.id);
   switch (target.className) {
     case "status-select":
-      myLibrary[targetIndex].setReadStatus(target.value);
+      myLibrary[targetIndex].readStatus = target.value;
       break;
     case "remove-book-btn":
       myLibrary.splice(targetIndex, 1);
