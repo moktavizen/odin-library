@@ -2,16 +2,36 @@ const myLibrary = [];
 
 // the constructor...
 class Book {
+  #id = crypto.randomUUID();
+  #title;
+  #author;
+  #pages;
+  #readStatus;
+
   constructor(title, author, pages, readStatus) {
-    this.id = crypto.randomUUID();
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.readStatus = readStatus;
+    this.#title = title;
+    this.#author = author;
+    this.#pages = pages;
+    this.#readStatus = readStatus;
   }
 
-  setReadStatus(newReadStatus) {
-    this.readStatus = newReadStatus;
+  get id() {
+    return this.#id;
+  }
+  get title() {
+    return this.#title;
+  }
+  get author() {
+    return this.#author;
+  }
+  get pages() {
+    return this.#pages;
+  }
+  get readStatus() {
+    return this.#readStatus;
+  }
+  set readStatus(newReadStatus) {
+    this.#readStatus = newReadStatus;
   }
 }
 
