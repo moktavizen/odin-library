@@ -167,6 +167,16 @@ confirmNewBookBtn.addEventListener("click", (e) => {
 
     clearLibrary();
     renderLibrary();
+  } else {
+    if (formAuthorInput.validity.valueMissing) {
+      formAuthorInput.setCustomValidity("The author name must be filled!");
+    }
+  }
+});
+
+formAuthorInput.addEventListener("input", () => {
+  if (!formAuthorInput.validity.validity) {
+    formAuthorInput.setCustomValidity("");
   }
 });
 
